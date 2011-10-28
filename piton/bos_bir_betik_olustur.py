@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from Tkinter import *
+import os
+
+pencere = Tk()
+pencere.geometry("200x75+75+50")
+pencere.title("Gökhan CEYLAN")
+
+
+def py_olustur():
+    isim = 'betik.py'
+    olustur = os.system('touch ' + isim)
+    dosya = open(isim, 'w')
+    dosya.write("#!/usr/bin/env python\n#-*- coding: utf-8 -*-")
+    dosya.close()
+
+
+dugme_1 = Button(text="py uzantılısı oluştur", command=py_olustur)
+dugme_1.place(relx=0.0, rely=0.1, relwidth=1)
+
+dugme_2 = Button(text="çıkış", command=pencere.destroy)
+dugme_2.place(relx=0.0, rely=0.5, relwidth=1)
+
+mainloop()

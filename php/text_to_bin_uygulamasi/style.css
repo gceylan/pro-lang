@@ -1,0 +1,49 @@
+body{
+    font-weight:normal;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:15px;
+    color:#2d2d2d;
+    margin:50px;
+    padding:0;
+    line-height:100%;
+    background-color: #898989;
+}
+
+#form textarea {
+	background: url("images/textarea.png") no-repeat;
+	border:0;
+	color: white;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	width:500px;
+	height:120px;
+	margin:0px;
+	padding:5px;
+	resize: none;
+}
+
+#to_bin_input {
+	background: url("images/to_bin.png") no-repeat;
+	border:0;
+	cursor: pointer;
+	width: 64px;
+	height:32px;
+	margin-top:10px;
+	padding:5px;
+	text-align: left;
+	text-indent: -10000px;
+	resize: none;
+}
+
+#to_text_input {
+	background: url("images/to_text.png") no-repeat;
+	border:0;
+	cursor: pointer;
+	width: 64px;
+	height:32px;
+	margin-top:10px;
+	padding:5px;
+	text-align: left;
+	text-indent: -10000px;
+	resize: none;
+}
