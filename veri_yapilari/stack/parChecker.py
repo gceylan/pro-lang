@@ -16,7 +16,7 @@ def parChecker(str_symbol):
     while ind < L and balanced:
         symbol = str_symbol[ind]
         if symbol == '(':
-            s.push(str_symbol[ind])
+            s.push(symbol)
         else:
             if s.isEmpty():
                 balanced = False
