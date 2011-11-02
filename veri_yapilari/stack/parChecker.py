@@ -19,7 +19,7 @@ def parChecker(str_symbol):
             s.push(str_symbol[ind])
         else:
             if s.isEmpty():
-                balancef = False
+                balanced = False
             else:
                 s.pop()
 
