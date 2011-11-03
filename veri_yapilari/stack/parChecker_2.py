@@ -10,20 +10,6 @@ def matches(open, close):
 
 
 def parChecker2(str_symbol):
-    """
-     >>> parChecker2("()}")
-     2. indexdeki "}" açılmadan kapandı.
-     False
-     >>> parChecker2("}()[[]){")
-     0. indexdeki "}" açılmadan kapandı.
-     False
-     >>> parChecker2("[]{()}")
-     True
-     >>> parChecker2("()[){")
-     2. indexdeki "[" kapatılmadı.
-     3. indexdeki ")" açılmadan kapandı.
-     False
-    """
     s = Stack(20)
     ind = 0
     L = len(str_symbol)
@@ -41,9 +27,8 @@ def parChecker2(str_symbol):
                 top = s.pop()
                 if not matches(top, symbol):
                     balanced = False
-                    print "%s. indexdeki \"%s\" kapatılmadı." %(ind - 1, top)
+                    print "\"%s\" kapatılmadı." %(top)
                     print "%s. indexdeki \"%s\" açılmadan kapandı." %(ind, symbol)
-
         ind += 1
 
     if not s.isEmpty():
@@ -52,7 +37,7 @@ def parChecker2(str_symbol):
             print "\"%s\" kapatılmadı." %(n)
     else:
         return balanced and s.isEmpty()
-
+    
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
