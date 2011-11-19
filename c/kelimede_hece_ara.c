@@ -28,7 +28,7 @@ int main(void) {
 	printf("kelime --> aranacak ifade:(ör: gceylan gc) ");
 	scanf("%s%s", kelime, hece);
 
-	if (hece_ara(kelime, hece) == 1)
+	if (hece_ara(kelime, hece))
 		printf("True");
 	else
 		printf("False");
