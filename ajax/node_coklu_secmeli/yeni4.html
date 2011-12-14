@@ -1,0 +1,119 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+.all_div {color:red;}
+//-->
+</style>
+
+<script type="text/javascript">
+
+var div_adi; 	//sonucu döndüreceğimiz div hangisi olacak?
+var nesne; 		//bir ajax nesnesi oluşturacağız...
+
+if (navigator.appName.search("Microsof") > -1) { 	//web browser kontrolü yaptık. malum IE biraz sorunlu...
+	nesne = new ActiveXObject("MSXML2.XMLHTTP");
+} else {
+	nesne = new XMLHttpRequest();
+}
+
+function yolla(id) {
+	div_adi = id + '_div'; 		//işaretlenen checkbox' a yanıt verilecek div seçilir. ör: check5_div
+	nesne.open('get', 'islem.php?check_name=' + id, true); 		//get metoduyla sayfa yinelenmeden islem.php dosyasına işaretlenen checkbox ın id si gönderilir.
+	nesne.onreadystatechange = handleResponse;
+	nesne.send(null);
+}
+
+
+function handleResponse() {
+	if (nesne.readyState == 4) {  		//ajax 4 döndürüyorsa yani işlem başarılı ise cevabı istenilen div' e yazar.
+		document.getElementById(div_adi).innerHTML = nesne.responseText;
+	}
+}
+
+
+var items = []
+
+function gonder(id2){
+    if(document.getElementById(id2).checked) {
+        document.getElementById(id2).disabled = true;
+        items.push(id2);
+        yolla(id2);
+    }
+}
+
+function send() {
+	document.getElementById('id_s').innerHTML = items;
+}
+
+</script>
+</head>
+<body>
+<h3>node: çoklu seçmeli</h3>
+<table>
+    <form name="form">
+    <tr>
+        <td><input type="checkbox" id="check1" onclick="javascript:gonder(this.id);"/>
+        <td>How's the right eye?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check1_div"></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check2" onclick="javascript:gonder(this.id);"/></td>
+        <td> How have you been feeling otherwise?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check2_div"></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check3" onclick="javascript:gonder(this.id);"/></td>
+        <td>Have you had any headaches?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check3_div"></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check4" onclick="javascript:gonder(this.id);"/></td>
+        <td>Has anything like ever happened before?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check4_div" disabled="true"></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check5" onclick="javascript:gonder(this.id);"/></td>
+        <td>Does either eye hurt?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check5_div"></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check6" onclick="javascript:gonder(this.id);"/></td>
+        <td>Do you have any jaw claudication?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check6_div" ></div></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" id="check7" onclick="gonder(this.id)"/></td>
+        <td>Does your jaw cramp when you chew?</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><div class="all_div" id="check7_div" disabled="true"></div></td>
+    </tr>
+    </form>
+</table>
+
+<button onclick="send()"> id' leri ekrana yaz </button>
+
+<div id="id_s"></div>
+<div id="sonuc"></div>
+</body>
+</html>
