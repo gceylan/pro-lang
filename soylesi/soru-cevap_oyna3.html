@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Söyleşi</title>
+
+<link type='text/css' href='style.css' rel='stylesheet' media='screen' />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$('a.soru-penceresi').click(function(){
+		
+		var pencere = $(this).attr('href');
+		$(pencere).fadeIn(400);
+		var popMargTop = ($(pencere).height() + 24) / 2;
+		var popMargLeft = ($(pencere).width() + 24) / 2;
+		$(pencere).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		$('body').append('<div id="maske"></div>');
+		$('#maske').fadeIn(400);
+		
+		soru = $('#soru-girisi').val();
+		$('#soru').val(soru);
+		
+		//if (soru[soru.length - 1] != '?') {
+			//$('#soru').val(soru + '?');
+		//}
+		
+		return false;
+	});
+	
+	$('a.kapat, #maske').live('click', function(){
+		$('#maske, .soru-popup').fadeOut(400, function(){
+			$('#maske').remove;
+		});
+		
+		return false;
+	});
+	
+	$('#kaydet').click(function(){
+		
+		var cevap = $('#cevap').val();
+		var ek1 = '<h3 class="h3">' + soru + '<h3>';
+		var ek2 = '<p class="p">' + cevap + '</p>';
+		var ek = ek1 + ek2;
+		$('.accordions').append(ek);
+		
+		$('#maske, .soru-popup').fadeOut(400, function(){
+			$('#maske').remove;
+		});
+		
+	});
+
+	
+	$('.giris').bind('focus', function(){
+		$(this).addClass('addFocus');
+		$(this).bind('blur' ,function(){
+			$(this).removeClass('addFocus');
+		});
+	});
+	
+});
+
+</script>
+
+
+</head>
+
+<body>
+
+<table id="sorular">
+	<tr>
+    	<td><h3>sorular</h3></td>
+    </tr>
+    <tr>
+    	<td><input type="text" class="giris" id="soru-girisi"></td>
+        <td><a href="#soru-penceresi" class="soru-penceresi"><input type="button" class="button" value="soruyu ekle"  /></a></td>
+    </tr>
+</table>
+
+<div id="soru-penceresi" class="soru-popup">
+
+<a href="#" class="kapat"><img src="closelabel.png" class="cikis" title="Close Window" alt="Close" /></a>
+
+<form>
+
+<table id="tablo">
+	<tr>
+    	<td class="field"><input type="text" class="giris" id="soru" placeholder="Soru"/></td>
+    </tr>
+    <tr>
+        <td class="field"><textarea class="giris" id="cevap" value="" placeholder="Cevap"></textarea></td>
+    </tr>
+    
+    <tr class="tr">
+    	<td><button class="button" id="kaydet" type="button">Kaydet</button></td>
+    </tr>
+
+</table>
+
+</form>
+</div>
+
+</body>
+</html>
