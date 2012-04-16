@@ -17,7 +17,7 @@ def rastgeleMatrisUret(satir=10, sutun=10):
     return matris
 
 
-def matris(matris, duyarlilik):
+def matrisEsikle(matris, duyarlilik):
     print "rastgele matris", matris
 
     #len(matris) = satir sayisina denk
@@ -34,4 +34,4 @@ def matris(matris, duyarlilik):
 
 # 3 satir 4 sütunluk matris üretelim ve fonksiyona gonderelim
 m = rastgeleMatrisUret(3, 4)
-print matris(m, 128)
+print matrisEsikle(m, 128)
