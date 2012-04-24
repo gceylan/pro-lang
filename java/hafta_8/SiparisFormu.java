@@ -1,13 +1,5 @@
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
+import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 
@@ -19,9 +11,9 @@ public class SiparisFormu extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	String yiyecekler[] = {
-			"Mercimek Çorbasý", "Karnýyarýk", "Pilav", "Sigara Böreði",
-			"Etimekli yoðurtlu salata", "Zeytinyaðlý taze fasülye",
-			"Mevsim salatasý", "Böðürtlenli pasta", "Makarna", "Kuru Fasülye",
+			"Mercimek ï¿½orbasï¿½", "Karnï¿½yarï¿½k", "Pilav", "Sigara Bï¿½reï¿½i",
+			"Etimekli yoï¿½urtlu salata", "Zeytinyaï¿½lï¿½ taze fasï¿½lye",
+			"Mevsim salatasï¿½", "Bï¿½ï¿½ï¿½rtlenli pasta", "Makarna", "Kuru Fasï¿½lye",
 			"Nohut"
 	};
 	
@@ -33,7 +25,7 @@ public class SiparisFormu extends JFrame {
 	};
 	
 	String icecekler[] = {
-			"Ayran", "Coca Cola", "Viþne Suyu", "Soda", "Nektari", "Kahve",
+			"Ayran", "Coca Cola", "Viï¿½ne Suyu", "Soda", "Nektari", "Kahve",
 			"Nescafe", "                                            "
 	};
 	
@@ -55,7 +47,7 @@ public class SiparisFormu extends JFrame {
 	double toplamTutar = 0;
 	
 	public void go() {
-		JFrame frame = new JFrame("Sipariþ Formu");
+		JFrame frame = new JFrame("Sipariï¿½ Formu");
 		frame.setLayout(new FlowLayout(20, 20, 20));
 		
 		yiyeceklerPaneli = new JPanel(new BorderLayout(5, 5));
@@ -77,7 +69,7 @@ public class SiparisFormu extends JFrame {
 		
 		siparislerPaneli = new JPanel(new BorderLayout(5, 5));
 		ekran = new JTextArea(10, 25);
-		siparislerPaneli.add(new JLabel("Sipariþlerin Toplamý"), BorderLayout.NORTH);
+		siparislerPaneli.add(new JLabel("Sipariï¿½lerin Toplamï¿½"), BorderLayout.NORTH);
 		siparislerPaneli.add(ekran, BorderLayout.CENTER);
 		scroll3 = new JScrollPane(ekran, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		siparislerPaneli.add(scroll3);
@@ -85,13 +77,13 @@ public class SiparisFormu extends JFrame {
 		iceceklerPaneli = new JPanel(new BorderLayout(5, 5));
 		iceceklerListBox = new JList(icecekler);
 		iceceklerListBox.setVisibleRowCount(9);
-		iceceklerPaneli.add(new JLabel("Ýçecekler"), BorderLayout.NORTH);
+		iceceklerPaneli.add(new JLabel("ï¿½ï¿½ecekler"), BorderLayout.NORTH);
 		iceceklerPaneli.add(iceceklerListBox, BorderLayout.CENTER);
 		scroll2 = new JScrollPane(iceceklerListBox, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		iceceklerPaneli.add(scroll2);
 		
 		icecekAdetPaneli = new JPanel(new BorderLayout(5, 5));
-		icecekAdetPaneli.add(new JLabel("Ýçecek Adedi"), BorderLayout.NORTH);
+		icecekAdetPaneli.add(new JLabel("ï¿½ï¿½ecek Adedi"), BorderLayout.NORTH);
 		icecekAdediComboBox = new JComboBox(adet);
 		icecekAdetPaneli.add(icecekAdediComboBox, BorderLayout.CENTER);
 		icecekleriEkle = new JButton("Ekle");
