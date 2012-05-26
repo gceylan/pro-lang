@@ -18,7 +18,7 @@ public class Ajanda extends JFrame {
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	
-	// swing bileþenleri
+	// swing bileï¿½enleri
 	JTextArea not;
 	JScrollPane scrooll;
 	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma;
@@ -34,10 +34,10 @@ public class Ajanda extends JFrame {
 		
 		d1 = new Dinleyici();
 		
-		// þu anki tarihin ve tarihPanel in bulunduðu panel.
+		// ï¿½u anki tarihin ve tarihPanel in bulunduï¿½u panel.
 		JPanel zamanPaneli = new JPanel();
 		zamanPaneli.setLayout(new BorderLayout(20, 20));
-		zamanPaneli.add(new JLabel("Þuan ki Tarih"), BorderLayout.WEST);
+		zamanPaneli.add(new JLabel("ï¿½uan ki Tarih"), BorderLayout.WEST);
 		JTextField simdikiTarih = new JTextField(15);
 		zamanPaneli.add(simdikiTarih, BorderLayout.CENTER);
 		simdikiTarih.setText(z.Now());
@@ -45,12 +45,12 @@ public class Ajanda extends JFrame {
 		
 		JPanel tarihPanel = new JPanel();
 		tarihPanel.setLayout(new BorderLayout(20, 20));
-		tarihPanel.add(new JLabel("Seçilen Tarih"), BorderLayout.WEST);
+		tarihPanel.add(new JLabel("Seï¿½ilen Tarih"), BorderLayout.WEST);
 		
 		tarihTf = new JTextField(15);
 		tarihPanel.add(tarihTf, BorderLayout.CENTER);
 		
-		tarihSec = new JButton("Tarih Seç");
+		tarihSec = new JButton("Tarih Seï¿½");
 		tarihPanel.add(tarihSec, BorderLayout.EAST);
 		tarihSec.addActionListener(d1);
 		
@@ -63,7 +63,7 @@ public class Ajanda extends JFrame {
 		not = new JTextArea(10, 34);
 		notP.add(not, BorderLayout.CENTER);
 		
-		// butonlarýn bulunduðu panel
+		// butonlarï¿½n bulunduï¿½u panel
 		JPanel butonlar = new JPanel();
 		ajandayaEkle = new JButton("Ajandaya Ekle");
 		ajandayaEkle.addActionListener(d1);
@@ -73,7 +73,7 @@ public class Ajanda extends JFrame {
 		depo.addActionListener(d1);
 		butonlar.add(depo);
 		
-		enYakinHatirlatma = new JButton("En yakýn tarihli hatýrlatma");
+		enYakinHatirlatma = new JButton("En yakï¿½n tarihli hatï¿½rlatma");
 		enYakinHatirlatma.addActionListener(d1);
 		butonlar.add(enYakinHatirlatma);
 		
@@ -83,7 +83,7 @@ public class Ajanda extends JFrame {
 		frame.add(notP);
 		frame.add(butonlar);
 		
-		// bunu unutursan heap bölgesi taþar...
+		// bunu unutursan heap bï¿½lgesi taï¿½ar...
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setBounds(350, 100, 430, 430);
 		frame.setVisible(true);
@@ -92,12 +92,12 @@ public class Ajanda extends JFrame {
 	public void connectDatabase() {
 		String url = "jdbc:mysql://localhost/ajanda";
 		String user = "root";
-		String passwd = "ben13753535866";
+		String passwd = "**********";
 		
 		try {
 			connect = DriverManager.getConnection(url, user, passwd);
 		} catch (SQLException sqlEx) {
-			System.err.println("Veritabanýna baðlanýlamadý!");
+			System.err.println("Veritabanï¿½na baï¿½lanï¿½lamadï¿½!");
 			sqlEx.printStackTrace();
 		}
 	}
@@ -107,7 +107,7 @@ public class Ajanda extends JFrame {
 			connect.close();
 		}
 		catch(SQLException sqlEX) {
-			System.err.println("Veritabaný kapýtýlamadý!");
+			System.err.println("Veritabanï¿½ kapï¿½tï¿½lamadï¿½!");
 			sqlEX.printStackTrace();
 		}
 	}
@@ -120,12 +120,12 @@ public class Ajanda extends JFrame {
 		tarih = "B";
 		
 		if (ozelNot.equals("") || tarih.equals("")) {
-			JOptionPane.showMessageDialog(null, "Not eklemeyi ve Tarih seçmeyi unutmayýn!");
+			JOptionPane.showMessageDialog(null, "Not eklemeyi ve Tarih seï¿½meyi unutmayï¿½n!");
 		}
 		else {
 			connectDatabase();
 			// TODO
-			JOptionPane.showMessageDialog(null, "Tarih: " + tarih + "\nNot: " + ozelNot, "Ýþlem Baþarýlý.", 1);
+			JOptionPane.showMessageDialog(null, "Tarih: " + tarih + "\nNot: " + ozelNot, "ï¿½ï¿½lem Baï¿½arï¿½lï¿½.", 1);
 			shutDownConnection();
 			clear();
 		}
@@ -134,7 +134,7 @@ public class Ajanda extends JFrame {
 	public void showDepo() throws SQLException {
 		JFrame frame = new JFrame("Creating a Scrollable JTable!");
 		  JPanel panel = new JPanel();
-		  Object [] sutunAdlari = {"id", "Tarih", "Özel Not"};
+		  Object [] sutunAdlari = {"id", "Tarih", "ï¿½zel Not"};
 		  
 		  connectDatabase();
 		  statement = connect.createStatement();
@@ -204,7 +204,7 @@ public class Ajanda extends JFrame {
 				}
 			}
 			else if (e.getSource() == enYakinHatirlatma) {
-				System.out.println("TEST AÞAMASINDAYIZ!!!");
+				System.out.println("TEST Aï¿½AMASINDAYIZ!!!");
 			}
 			
 		}
