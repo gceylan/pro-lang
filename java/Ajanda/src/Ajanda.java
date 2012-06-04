@@ -20,11 +20,17 @@ public class Ajanda extends JFrame implements Runnable {
 	JTextField tarihTf;
 	Dinleyici d1;
 	
+	Zaman z;
+	
 	public Ajanda() {
 		JFrame frame = new JFrame("AjandaApp");
 		frame.setLayout(new FlowLayout(20, 20, 20));
 		
+		z = new Zaman();
 		d1 = new Dinleyici();
+		vt = new Veritabani(url, user, password);
+		
+		sistemTemasiniKullan();
 
 		JPanel zamanPaneli = new JPanel();
 		zamanPaneli.setLayout(new BorderLayout(10, 10));
@@ -32,8 +38,6 @@ public class Ajanda extends JFrame implements Runnable {
 		zamanPaneli.add(new JLabel("Şuan ki Tarih"), BorderLayout.WEST);
 		
 		simdikiTarih = new JTextField(15);
-		simdikiTarih.setBackground(Color.BLACK);
-		simdikiTarih.setForeground(Color.WHITE);
 		zamanPaneli.add(simdikiTarih, BorderLayout.CENTER);
 		simdikiTarih.setEditable(false);
 		
@@ -55,7 +59,7 @@ public class Ajanda extends JFrame implements Runnable {
 		
 		notP.add(new JLabel("Notunuzu ekleyin"), BorderLayout.NORTH);
 		
-		not = new JTextArea(10, 34);
+		not = new JTextArea(10, 30);
 		not.setLineWrap(true);
 		notP.add(not, BorderLayout.CENTER);
 		
@@ -71,10 +75,6 @@ public class Ajanda extends JFrame implements Runnable {
 		enYakinHatirlatma = new JButton("En Yakın Hatırlatma");
 		enYakinHatirlatma.addActionListener(d1);
 		butonlar.add(enYakinHatirlatma, BorderLayout.EAST);
-		
-		vt = new Veritabani(url, user, password);
-		sistemTemasiniKullan();
-		
 
 		frame.add(zamanPaneli);
 		frame.add(tarihPanel);
@@ -94,7 +94,7 @@ public class Ajanda extends JFrame implements Runnable {
 		});
 
 		frame.setResizable(false);
-		frame.setBounds(350, 100, 420, 420);
+		frame.setBounds(350, 100, 370, 400);
 		frame.setVisible(true);
 	}
 	
@@ -172,8 +172,11 @@ public class Ajanda extends JFrame implements Runnable {
 	}
 	
 	public void theFirstReminder() throws SQLException {
-		StringBuilder hatirlatma = vt.getFirtReminder();
-		JOptionPane.showMessageDialog(null, hatirlatma);
+		String[] hatirlatma = vt.getFirtReminder();
+		JOptionPane.showMessageDialog(null, "En yakın hatırlatma tarihi : "
+				+ hatirlatma[0] + "\n"
+				+ "Hatırlatma notu : " + hatirlatma[1] + "\n"
+				+ "Kalan süre : " + z.kacSaatKacDkVar(hatirlatma[0]));
 	}
 	
 	public void clear() {

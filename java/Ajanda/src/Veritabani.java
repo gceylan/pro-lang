@@ -98,9 +98,9 @@ public class Veritabani {
 		return metaData;
 	}
 	
-	public StringBuilder getFirtReminder() throws SQLException {
+	public String[] getFirtReminder() throws SQLException {
 		Zaman z = new Zaman();
-		StringBuilder sb = new StringBuilder();
+		String[] gonder = new String[2];
 		
 		long ilk = 9999;
 		long gelen;
@@ -123,9 +123,9 @@ public class Veritabani {
 				mesaj = resultset.getString(3);
 			}
 		}
-		sb.append("En Yakın Hatırlatma Tarihi: " + ilkHatirlatmaTarihi + "\n");
-		sb.append("Hatırlatma mesajı: " + mesaj);
+		gonder[0] = ilkHatirlatmaTarihi;
+		gonder[1] = mesaj;
 		
-		return sb;
+		return gonder;
 	}
 }

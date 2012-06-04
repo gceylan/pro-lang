@@ -18,7 +18,7 @@ public class Zaman {
 		return utilDate;
 	}
 	
-	public void kacSaatKacDkVar(String date) { 
+	public String kacSaatKacDkVar(String date) { 
 		Zaman z = new Zaman();
 		
 		long l1 = z.convertToDate(Zaman.Now()).getTime();
@@ -29,11 +29,12 @@ public class Zaman {
 		long dk = ((l2-l1) / (1000 * 60));
 		long sn = (l2-l1) / 1000;
 		
-		System.out.println(
-				((gun == 0) ? "" : gun + " gün ") +
+		String neKadar = ""
+				+ ((gun == 0) ? "" : gun + " gün ") +
 				(((saat % 60) == 0) ? "" : (saat % 60) % 24 + " saat ") +
-				(((dk % 60) == 0) ? "" : dk % 60 + " dakika ") +
-				sn % 60 + " sn var.");
+				(((dk % 60) == 0) ? "" : dk % 60 + " dakika ") + sn % 60 + " sn var.";
+		
+		return neKadar;
 	}
 	
 	public long kacSaatVar(String date) {
