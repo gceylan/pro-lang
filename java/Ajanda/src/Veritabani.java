@@ -17,7 +17,7 @@ public class Veritabani {
 		try {
 			connect = DriverManager.getConnection(url, user, password);
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "VeriatabanÄ±na baÄŸlanÄ±lamadÄ±!",
+			JOptionPane.showMessageDialog(null, "Veritabanýna Baðlanýlamadý!",
 					"Hata!", 0);
 			sqlEx.printStackTrace();
 		}
@@ -33,8 +33,8 @@ public class Veritabani {
 				resultset.close();
 			
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "VeritabanÄ± baÄŸlantÄ±sÄ± kapatÄ±la"
-					+ "madÄ±!", "Hata!", 0);
+			JOptionPane.showMessageDialog(null, "Veritabaný baðlantýsý kapatýla"
+					+ "madý!", "Hata!", 0);
 			sqlEx.printStackTrace();
 		}
 	}
@@ -46,9 +46,14 @@ public class Veritabani {
 			preparedStatement.setString(1, tarih);
 			preparedStatement.setString(2, not);
 			preparedStatement.executeUpdate();
+			
+			String islenmisNot = Ajanda.strDuzelt(not);
+			
+			JOptionPane.showMessageDialog(null, "Tarih-saat: " + tarih
+					+ "\nNot:\n" + islenmisNot + "\nÝþlem Tamamlandý.");
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "Bilgiler veritabanÄ±na "
-					+ "kaydedilemedi!", "Hata!", 0);
+			JOptionPane.showMessageDialog(null, "Bilgiler veritabanýna "
+				+ "kaydedilemedi!", "Hata!", 0);
 			sqlEx.printStackTrace();
 		}
 	}
@@ -78,7 +83,7 @@ public class Veritabani {
 			}
 			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Depo GÃ¶rÃ¼ntÃ¼lenemedi!");
+			JOptionPane.showMessageDialog(null, "Depo Görüntülenemedi!");
 			e.printStackTrace();
 		}
 		
@@ -92,7 +97,7 @@ public class Veritabani {
 				metaData[i] = resultset.getMetaData().getColumnClassName(i);
 			}
 		} catch (SQLException exception) {
-			JOptionPane.showMessageDialog(null, "Metadata bilgisi alÄ±namadÄ±!");
+			JOptionPane.showMessageDialog(null, "Metadata bilgisi alýnamadý!");
 			exception.printStackTrace();
 		}
 		return metaData;

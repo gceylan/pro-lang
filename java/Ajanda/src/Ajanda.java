@@ -16,11 +16,12 @@ public class Ajanda extends JFrame implements Runnable {
 	JTextField simdikiTarih;
 	JTextArea not;
 	JScrollPane scrooll;
-	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, gunuGecmisHatirlatmar;
+	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, kalanSure;
 	JTextField tarihTf;
 	Dinleyici d1;
 	
 	Zaman z;
+	String[] hatirlatma;
 	
 	public Ajanda() {
 		JFrame frame = new JFrame("AjandaApp");
@@ -33,25 +34,25 @@ public class Ajanda extends JFrame implements Runnable {
 		sistemTemasiniKullan();
 
 		JPanel zamanPaneli = new JPanel();
-		zamanPaneli.setLayout(new BorderLayout(10, 10));
+		zamanPaneli.setLayout(new BorderLayout(15, 10));
 		
 		zamanPaneli.add(new JLabel("Şuan ki Tarih"), BorderLayout.WEST);
 		
-		simdikiTarih = new JTextField(15);
-		zamanPaneli.add(simdikiTarih, BorderLayout.CENTER);
+		simdikiTarih = new JTextField(20);
 		simdikiTarih.setEditable(false);
+		zamanPaneli.add(simdikiTarih, BorderLayout.CENTER);
 		
 		
 		JPanel tarihPanel = new JPanel();
-		tarihPanel.setLayout(new BorderLayout(10, 10));
+		tarihPanel.setLayout(new BorderLayout(15, 10));
 		tarihPanel.add(new JLabel("Seçilen Tarih"), BorderLayout.WEST);
 		
-		tarihTf = new JTextField(15);
+		tarihTf = new JTextField(20);
 		tarihPanel.add(tarihTf, BorderLayout.CENTER);
 		
 		tarihSec = new JButton("Tarih Seç");
-		tarihPanel.add(tarihSec, BorderLayout.EAST);
 		tarihSec.addActionListener(d1);
+		tarihPanel.add(tarihSec, BorderLayout.EAST);
 		
 		
 		JPanel notP = new JPanel();
@@ -59,27 +60,34 @@ public class Ajanda extends JFrame implements Runnable {
 		
 		notP.add(new JLabel("Notunuzu ekleyin"), BorderLayout.NORTH);
 		
-		not = new JTextArea(10, 30);
+		not = new JTextArea(15, 30);
 		not.setLineWrap(true);
 		notP.add(not, BorderLayout.CENTER);
 		
-		JPanel butonlar = new JPanel(new FlowLayout(0, 0, 10));
+		Font f = new Font("Arial", Font.ITALIC ,13);
+		not.setFont(f);
+		
+		JPanel butonlar = new JPanel(new GridLayout(2, 2, 5, 5));
 		ajandayaEkle = new JButton("Ajandaya Ekle");
 		ajandayaEkle.addActionListener(d1);
-		butonlar.add(ajandayaEkle, BorderLayout.WEST);
+		butonlar.add(ajandayaEkle);
 		
 		depo = new JButton("Depo");
 		depo.addActionListener(d1);
-		butonlar.add(depo, BorderLayout.CENTER);
+		butonlar.add(depo);
 		
 		enYakinHatirlatma = new JButton("En Yakın Hatırlatma");
 		enYakinHatirlatma.addActionListener(d1);
-		butonlar.add(enYakinHatirlatma, BorderLayout.EAST);
-
+		butonlar.add(enYakinHatirlatma);
+		
+		kalanSure = new JButton();
+		butonlar.add(kalanSure);
+		
+		notP.add(butonlar, BorderLayout.SOUTH);
+		
 		frame.add(zamanPaneli);
 		frame.add(tarihPanel);
 		frame.add(notP);
-		frame.add(butonlar);
 		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -92,9 +100,9 @@ public class Ajanda extends JFrame implements Runnable {
 				System.exit(0);
 			}
 		});
-
+		
 		frame.setResizable(false);
-		frame.setBounds(350, 100, 370, 400);
+		frame.setBounds(350, 100, 440, 500);
 		frame.setVisible(true);
 	}
 	
@@ -104,6 +112,8 @@ public class Ajanda extends JFrame implements Runnable {
 			try {
 				Thread.sleep(1000);
 				simdikiTarih.setText(Zaman.Now());
+				hatirlatma = vt.getFirtReminder();
+				kalanSure.setText(z.kacSaatKacDkVar(hatirlatma[0]));
 			} catch (Exception treadEx) {
 				treadEx.printStackTrace();
 			}
@@ -137,19 +147,18 @@ public class Ajanda extends JFrame implements Runnable {
 		  tablo.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		  tablo.getColumnModel().getColumn(0).setPreferredWidth(30);
 		  tablo.getColumnModel().getColumn(1).setPreferredWidth(120);
-		  tablo.getColumnModel().getColumn(2).setPreferredWidth(350);
+		  tablo.getColumnModel().getColumn(2).setPreferredWidth(500);
 		  tablo.setSize(new Dimension(100, 100));
 		  
 		  JScrollPane scroollPaneli = new JScrollPane(tablo);
 		  panel.add(scroollPaneli);
 		  
 		  JTableHeader header = tablo.getTableHeader();
-		  //header.setBackground(Color.yellow);
 		  header.setForeground(Color.BLUE);
 		  header.setBackground(Color.BLACK);
 		  
 		  frame.add(panel);
-		  frame.setSize(470,470);
+		  frame.setSize(480,490);
 		  //frame.setUndecorated(true);
 		  //frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		  frame.setVisible(true);
@@ -159,24 +168,47 @@ public class Ajanda extends JFrame implements Runnable {
 		String tarih = tarihTf.getText();
 		String ozelNot = not.getText();
 		
-		if (tarih.equals("") || ozelNot.equals("")) {
-			JOptionPane.showMessageDialog(null, "Not eklemeyi ve Tarih seçmeyi"
-					+ " unutmayın!", "Uyarı", 1);
+		if (ozelNot.length() <= 400) {
+			if (tarih.equals("") || ozelNot.equals("")) {
+				JOptionPane.showMessageDialog(null, "Not eklemeyi ve Tarih"
+						+ " seçmeyi unutmayın!", "Uyarı", 1);
+			} else {
+				vt.saveDatabase(tarih, ozelNot);
+				clear();
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Notunuz 400 karakter sınırını "
+					+ "aşıyor!", "Uyarı", 1);
 		}
-		else {
-			vt.saveDatabase(tarih, ozelNot);
-			JOptionPane.showMessageDialog(null, "Tarih-saat: " + tarih
-					+ "\nNot: " + ozelNot + "\nİşlem Tamamlandı.");
-			clear();
-		}
+		
 	}
 	
 	public void theFirstReminder() throws SQLException {
-		String[] hatirlatma = vt.getFirtReminder();
+		hatirlatma = vt.getFirtReminder();
+		String not = strDuzelt(hatirlatma[1]);
+		
 		JOptionPane.showMessageDialog(null, "En yakın hatırlatma tarihi : "
 				+ hatirlatma[0] + "\n"
-				+ "Hatırlatma notu : " + hatirlatma[1] + "\n"
+				+ "Hatırlatma notu : \n" + not
 				+ "Kalan süre : " + z.kacSaatKacDkVar(hatirlatma[0]));
+	}
+	
+	public static String strDuzelt( String not ) {
+		String gonder = null;
+		int j = 0, k = 50;
+		int boy = not.length(); 
+		if (boy > 50) {
+			while (boy % 50 > 0) {
+				gonder += not.substring(j, k) + "\n";
+				boy -= 50;
+				j = k;
+				k += (boy < 50) ? boy : 50;
+			}
+		} else {
+			gonder = not;
+		}
+		
+		return gonder;
 	}
 	
 	public void clear() {
