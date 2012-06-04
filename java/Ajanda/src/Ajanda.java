@@ -11,7 +11,7 @@ public class Ajanda extends JFrame implements Runnable {
 	Veritabani vt = null;
 	String url = "jdbc:mysql://localhost/ajanda2";
 	String user = "root";
-	String password = "-----";
+	String password = "------";
 
 	JTextField simdikiTarih;
 	JTextArea not;
