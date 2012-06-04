@@ -15,7 +15,7 @@ class DatePicker {
                 d.setModal(true);
                 String[] header = { "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
                 JPanel p1 = new JPanel(new GridLayout(7, 7));
-                p1.setPreferredSize(new Dimension(430, 120));
+                p1.setPreferredSize(new Dimension(430, 140));
 
                 for (int x = 0; x < button.length; x++) {
                         final int selection = x;

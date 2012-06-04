@@ -11,7 +11,7 @@ public class Ajanda extends JFrame implements Runnable {
 	Veritabani vt = null;
 	String url = "jdbc:mysql://localhost/ajanda2";
 	String user = "root";
-	String password = "ben13753535866";
+	String password = "-----";
 
 	JTextField simdikiTarih;
 	JTextArea not;
@@ -114,16 +114,12 @@ public class Ajanda extends JFrame implements Runnable {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
