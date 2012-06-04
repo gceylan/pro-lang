@@ -11,7 +11,7 @@ public class Ajanda extends JFrame implements Runnable {
 	Veritabani vt = null;
 	String url = "jdbc:mysql://localhost/ajanda2";
 	String user = "root";
-	String password = "****";
+	String password = "ben13753535866";
 
 	JTextField simdikiTarih;
 	JTextArea not;
@@ -81,7 +81,18 @@ public class Ajanda extends JFrame implements Runnable {
 		frame.add(notP);
 		frame.add(butonlar);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent winEvent) {
+				try {
+					vt.shutDownConnection();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				System.exit(0);
+			}
+		});
+
 		frame.setResizable(false);
 		frame.setBounds(350, 100, 420, 420);
 		frame.setVisible(true);
@@ -129,7 +140,7 @@ public class Ajanda extends JFrame implements Runnable {
 		  
 		  tablo.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		  tablo.getColumnModel().getColumn(0).setPreferredWidth(30);
-		  tablo.getColumnModel().getColumn(1).setPreferredWidth(110);
+		  tablo.getColumnModel().getColumn(1).setPreferredWidth(120);
 		  tablo.getColumnModel().getColumn(2).setPreferredWidth(350);
 		  tablo.setSize(new Dimension(100, 100));
 		  
@@ -160,6 +171,7 @@ public class Ajanda extends JFrame implements Runnable {
 			vt.saveDatabase(tarih, ozelNot);
 			JOptionPane.showMessageDialog(null, "Tarih-saat: " + tarih
 					+ "\nNot: " + ozelNot + "\nİşlem Tamamlandı.");
+			clear();
 		}
 	}
 	
