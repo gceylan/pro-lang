@@ -9,9 +9,9 @@ public class Ajanda extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
 	Veritabani vt = null;
-	String url = "jdbc:mysql://localhost/ajanda2";
+	String url = "jdbc:mysql://localhost/dbAjanda";
 	String user = "root";
-	String password = "------";
+	String password = "gceylan";
 
 	JTextField simdikiTarih;
 	JTextArea not;
@@ -172,7 +172,8 @@ public class Ajanda extends JFrame implements Runnable {
 	}
 	
 	public void theFirstReminder() throws SQLException {
-		
+		StringBuilder hatirlatma = vt.getFirtReminder();
+		JOptionPane.showMessageDialog(null, hatirlatma);
 	}
 	
 	public void clear() {
