@@ -102,8 +102,8 @@ public class Veritabani {
 		Zaman z = new Zaman();
 		String[] gonder = new String[2];
 		
-		long ilk = 9999;
-		long gelen;
+		double ilk = 9999;
+		double gelen;
 		
 		String ilkHatirlatmaTarihi = null;
 		String gelenTarih = null;
@@ -115,12 +115,13 @@ public class Veritabani {
 		resultset = preparedStatement.executeQuery();
 		
 		while (resultset.next()) {
-			gelenTarih = resultset.getString(2);
+			gelenTarih = resultset.getString("tarih-saat");
 			gelen = z.kacSaatVar(gelenTarih);
-			if ( gelen > 0 && gelen < ilk) {
+			//System.out.println(gelenTarih + "       " + resultset.getString("not") + "      " + gelen);
+			if ( gelen > 0 && gelen <= ilk) {
 				ilk = gelen;
 				ilkHatirlatmaTarihi = gelenTarih;
-				mesaj = resultset.getString(3);
+				mesaj = resultset.getString("not");
 			}
 		}
 		gonder[0] = ilkHatirlatmaTarihi;

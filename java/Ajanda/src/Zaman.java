@@ -29,28 +29,37 @@ public class Zaman {
 		long dk = ((l2-l1) / (1000 * 60));
 		long sn = (l2-l1) / 1000;
 		
-		String neKadar = ""
-				+ ((gun == 0) ? "" : gun + " gün ") +
+		String neKadar = "" + 
+				((gun == 0) ? "" : gun + " gün ") +
 				(((saat % 60) == 0) ? "" : (saat % 60) % 24 + " saat ") +
 				(((dk % 60) == 0) ? "" : dk % 60 + " dakika ") + sn % 60 + " sn var.";
 		
 		return neKadar;
 	}
 	
-	public long kacSaatVar(String date) {
+	public double kacSaatVar(String date) {
 		Zaman z = new Zaman();
 		
 		long l1 = z.convertToDate(Zaman.Now()).getTime();
 		long l2 = z.convertToDate(date).getTime();
 		
-		return ((l2-l1) / (1000 * 60 * 60));
+		// saat ve dakika duyarlılığıyla çalışıyor...
+		long saat = ((l2-l1) / (1000 * 60 * 60));
+		long dk = ((l2-l1) / (1000 * 60)) % 60;
+		
+		//System.out.println((saat == saat + dk / 100.0) ? "evet şimdi mail at" : "daha zamanı değil");
+		
+		// TODO son 1 saat kala mail gönderilecek. ve sesli uyarı yapacak.
+		// getFirstReminder için bu dönüş değeri önemli
+		// Eger hatırlatmaya 1 saat 25 dk kaldıysa 1.25 şeklinde döndür.
+		return saat + dk / 100.0;
 	}
 	
 	public static void main(String[] args) {
 		Zaman z = new Zaman();
 		
-		z.kacSaatKacDkVar("22-12-2012 20:20:20");
-		System.out.println(z.kacSaatVar("22-12-2012 20:20:20"));
+		System.out.println(z.kacSaatKacDkVar("04-06-2012 21:30:59"));
+		System.out.println(z.kacSaatVar("04-06-2012 21:30:59"));
 		
 		/*long l1 = z.convertToDate("04-06-2012 12:20:00").getTime();
 		long l2 = z.convertToDate("04-07-2012 12:30:00").getTime();
