@@ -1,8 +1,11 @@
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
+
+import javazoom.jl.decoder.JavaLayerException;
 
 public class Ajanda extends JFrame implements Runnable {
 	
@@ -16,19 +19,23 @@ public class Ajanda extends JFrame implements Runnable {
 	JTextField simdikiTarih;
 	JTextArea not;
 	JScrollPane scrooll;
-	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, kalanSure;
+	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, kalanSure, tamam;
 	JTextField tarihTf;
 	Dinleyici d1;
 	
 	Zaman z;
 	String[] hatirlatma;
 	
-	public Ajanda() {
+	JLayerDemo ses;
+	boolean sonBirSaat = true;
+	
+	public Ajanda() throws JavaLayerException {
 		JFrame frame = new JFrame("AjandaApp");
 		frame.setLayout(new FlowLayout(20, 20, 20));
 		
 		z = new Zaman();
 		d1 = new Dinleyici();
+		ses = new JLayerDemo();
 		vt = new Veritabani(url, user, password);
 		
 		sistemTemasiniKullan();
@@ -102,7 +109,7 @@ public class Ajanda extends JFrame implements Runnable {
 		});
 		
 		frame.setResizable(false);
-		frame.setBounds(350, 100, 440, 500);
+		frame.setBounds(350, 100, 430, 500);
 		frame.setVisible(true);
 	}
 	
@@ -114,10 +121,39 @@ public class Ajanda extends JFrame implements Runnable {
 				simdikiTarih.setText(Zaman.Now());
 				hatirlatma = vt.getFirtReminder();
 				kalanSure.setText(z.kacSaatKacDkVar(hatirlatma[0]));
+				
+				if (z.sesCalinsinMi(hatirlatma[0]).equals("1:0:0") && sonBirSaat) {
+					sonBirSaat = false;
+					uyariPenceresi();
+					ses.oynat();
+				}
 			} catch (Exception treadEx) {
 				treadEx.printStackTrace();
 			}
 		}
+	}
+	
+	public void uyariPenceresi() {
+		final JFrame f = new JFrame();
+		f.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		
+		JPanel p = new JPanel();
+		tamam = new JButton("Tamam");
+		tamam.addActionListener(d1);
+		p.add(tamam);
+		
+		tamam.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ses.kapat();
+				f.setVisible(false);
+			}
+		});
+		
+		f.add(new JLabel("1 saat Kaldı. Mail at ve Uyarı sesini çal!"));
+		f.add(p);
+		f.setBounds(300, 300, 300, 100);
+		f.setVisible(true);
 	}
 	
 	public void sistemTemasiniKullan() {
@@ -190,11 +226,11 @@ public class Ajanda extends JFrame implements Runnable {
 		JOptionPane.showMessageDialog(null, "En yakın hatırlatma tarihi : "
 				+ hatirlatma[0] + "\n"
 				+ "Hatırlatma notu : \n" + not
-				+ "Kalan süre : " + z.kacSaatKacDkVar(hatirlatma[0]));
+				+ "\nKalan süre : " + z.kacSaatKacDkVar(hatirlatma[0]));
 	}
 	
 	public static String strDuzelt( String not ) {
-		String gonder = null;
+		String gonder = "";
 		int j = 0, k = 50;
 		int boy = not.length(); 
 		if (boy > 50) {
@@ -246,7 +282,7 @@ public class Ajanda extends JFrame implements Runnable {
 		}	
 	}
 	
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, JavaLayerException {
 		Ajanda ajnd = new Ajanda();
 		Thread thread = new Thread(ajnd);
 		thread.start();

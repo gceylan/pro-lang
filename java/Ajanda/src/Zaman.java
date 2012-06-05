@@ -18,6 +18,7 @@ public class Zaman {
 		return utilDate;
 	}
 	
+	// uyari verirken kullanildi.
 	public String kacSaatKacDkVar(String date) { 
 		Zaman z = new Zaman();
 		
@@ -37,6 +38,7 @@ public class Zaman {
 		return neKadar;
 	}
 	
+	// ilk hatirlatmayi bulmada kullanildi.
 	public double kacSaatVar(String date) {
 		Zaman z = new Zaman();
 		
@@ -49,10 +51,24 @@ public class Zaman {
 		return saat + dk / 100.0;
 	}
 	
+	// Burasi pek Dry olmadi.
+	public String sesCalinsinMi(String date) {
+		Zaman z = new Zaman();
+		
+		long l1 = z.convertToDate(Zaman.Now()).getTime();
+		long l2 = z.convertToDate(date).getTime();
+
+		long saat = ((l2-l1) / (1000 * 60 * 60));
+		long dk = (((l2-l1) / (1000 * 60))) % 60;
+		long sn = ((l2-l1) / 1000) % 60;
+		
+		return saat + ":" + dk + ":" + sn;
+	}
+	
 	public static void main(String[] args) {
 		Zaman z = new Zaman();
 		
-		System.out.println(z.kacSaatKacDkVar("04-06-2012 23:30:59"));
-		System.out.println(z.kacSaatVar("04-06-2012 23:30:59"));
+		System.out.println(z.kacSaatKacDkVar("05-06-2012 16:45:00"));
+		System.out.println(z.kacSaatVar("05-06-2012 16:45:00"));
 	}
 }

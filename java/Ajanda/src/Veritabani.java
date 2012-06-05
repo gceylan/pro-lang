@@ -17,7 +17,7 @@ public class Veritabani {
 		try {
 			connect = DriverManager.getConnection(url, user, password);
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "Veritabanýna Baðlanýlamadý!",
+			JOptionPane.showMessageDialog(null, "VeritabanÄ±na BaÄŸlanÄ±lamadÄ±!",
 					"Hata!", 0);
 			sqlEx.printStackTrace();
 		}
@@ -33,8 +33,8 @@ public class Veritabani {
 				resultset.close();
 			
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "Veritabaný baðlantýsý kapatýla"
-					+ "madý!", "Hata!", 0);
+			JOptionPane.showMessageDialog(null, "VeritabanÄ± baÄŸlantÄ±sÄ± kapatÄ±la"
+					+ "madÄ±!", "Hata!", 0);
 			sqlEx.printStackTrace();
 		}
 	}
@@ -50,9 +50,9 @@ public class Veritabani {
 			String islenmisNot = Ajanda.strDuzelt(not);
 			
 			JOptionPane.showMessageDialog(null, "Tarih-saat: " + tarih
-					+ "\nNot:\n" + islenmisNot + "\nÝþlem Tamamlandý.");
+					+ "\nNot:\n" + islenmisNot + "\nÄ°ÅŸlem TamamlandÄ±.");
 		} catch (SQLException sqlEx) {
-			JOptionPane.showMessageDialog(null, "Bilgiler veritabanýna "
+			JOptionPane.showMessageDialog(null, "Bilgiler veritabanÄ±na "
 				+ "kaydedilemedi!", "Hata!", 0);
 			sqlEx.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class Veritabani {
 			}
 			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Depo Görüntülenemedi!");
+			JOptionPane.showMessageDialog(null, "Depo GÃ¶rÃ¼ntÃ¼lenemedi!");
 			e.printStackTrace();
 		}
 		
@@ -97,7 +97,7 @@ public class Veritabani {
 				metaData[i] = resultset.getMetaData().getColumnClassName(i);
 			}
 		} catch (SQLException exception) {
-			JOptionPane.showMessageDialog(null, "Metadata bilgisi alýnamadý!");
+			JOptionPane.showMessageDialog(null, "Metadata bilgisi alÄ±namadÄ±!");
 			exception.printStackTrace();
 		}
 		return metaData;
@@ -122,7 +122,6 @@ public class Veritabani {
 		while (resultset.next()) {
 			gelenTarih = resultset.getString("tarih-saat");
 			gelen = z.kacSaatVar(gelenTarih);
-			//System.out.println(gelenTarih + "       " + resultset.getString("not") + "      " + gelen);
 			if ( gelen > 0 && gelen <= ilk) {
 				ilk = gelen;
 				ilkHatirlatmaTarihi = gelenTarih;
