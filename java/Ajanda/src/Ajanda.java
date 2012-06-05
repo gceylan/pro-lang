@@ -19,7 +19,7 @@ public class Ajanda extends JFrame implements Runnable {
 	JTextField simdikiTarih;
 	JTextArea not;
 	JScrollPane scrooll;
-	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, kalanSure, tamam;
+	JButton ajandayaEkle, tarihSec, depo, enYakinHatirlatma, bilgi, tamam;
 	JTextField tarihTf;
 	Dinleyici d1;
 	
@@ -28,6 +28,8 @@ public class Ajanda extends JFrame implements Runnable {
 	
 	JLayerDemo ses;
 	boolean sonBirSaat = true;
+	
+	static Thread thread;
 	
 	public Ajanda() throws JavaLayerException {
 		JFrame frame = new JFrame("AjandaApp");
@@ -87,8 +89,8 @@ public class Ajanda extends JFrame implements Runnable {
 		enYakinHatirlatma.addActionListener(d1);
 		butonlar.add(enYakinHatirlatma);
 		
-		kalanSure = new JButton();
-		butonlar.add(kalanSure);
+		bilgi = new JButton();
+		butonlar.add(bilgi);
 		
 		notP.add(butonlar, BorderLayout.SOUTH);
 		
@@ -113,6 +115,7 @@ public class Ajanda extends JFrame implements Runnable {
 		frame.setVisible(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
 		while (true) {
@@ -120,12 +123,22 @@ public class Ajanda extends JFrame implements Runnable {
 				Thread.sleep(1000);
 				simdikiTarih.setText(Zaman.Now());
 				hatirlatma = vt.getFirtReminder();
-				kalanSure.setText(z.kacSaatKacDkVar(hatirlatma[0]));
 				
-				if (z.sesCalinsinMi(hatirlatma[0]).equals("1:0:0") && sonBirSaat) {
+				if (hatirlatma[0] == null) {
+					JOptionPane.showMessageDialog(null, "Veritabanı boş!");
+					thread.stop();
+					break;
+				}
+				
+				bilgi.setText(z.kacSaatKacDkVar(hatirlatma[0]));
+				
+				if (z.sesCalinsinMi(hatirlatma[0]).equals("1:0:1") && sonBirSaat) {
+					bilgi.setText("Mail gönderiliyor...");
+					SendMail mail = new SendMail();
+					mail.send(hatirlatma[0] + " tarihli hatırlatma!", hatirlatma[1]);
+					bilgi.setText("Mail Gönderildi.");
+					uyariVerMailGonder();
 					sonBirSaat = false;
-					uyariPenceresi();
-					ses.oynat();
 				}
 			} catch (Exception treadEx) {
 				treadEx.printStackTrace();
@@ -133,15 +146,16 @@ public class Ajanda extends JFrame implements Runnable {
 		}
 	}
 	
-	public void uyariPenceresi() {
-		final JFrame f = new JFrame();
-		f.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+	public void uyariVerMailGonder() throws JavaLayerException {
+		final JFrame f = new JFrame("Hatırlatmanız var!");
+		f.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 		
-		JPanel p = new JPanel();
+		JPanel p = new JPanel(new BorderLayout(10, 10));
+		
+		p.add(new JLabel("Mail Gönderildi!"), BorderLayout.CENTER);
+		
 		tamam = new JButton("Tamam");
 		tamam.addActionListener(d1);
-		p.add(tamam);
-		
 		tamam.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -149,11 +163,25 @@ public class Ajanda extends JFrame implements Runnable {
 				f.setVisible(false);
 			}
 		});
+		p.add(tamam, BorderLayout.SOUTH);
 		
-		f.add(new JLabel("1 saat Kaldı. Mail at ve Uyarı sesini çal!"));
+		f.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent winEvent) {
+				try {
+					ses.kapat();
+					f.setVisible(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		f.add(p);
-		f.setBounds(300, 300, 300, 100);
 		f.setVisible(true);
+		f.setBounds(300, 300, 300, 130);
+		
+		ses.oynat();
 	}
 	
 	public void sistemTemasiniKullan() {
@@ -229,7 +257,7 @@ public class Ajanda extends JFrame implements Runnable {
 				+ "\nKalan süre : " + z.kacSaatKacDkVar(hatirlatma[0]));
 	}
 	
-	public static String strDuzelt( String not ) {
+	public static String strDuzelt(String not) {
 		String gonder = "";
 		int j = 0, k = 50;
 		int boy = not.length(); 
@@ -284,7 +312,7 @@ public class Ajanda extends JFrame implements Runnable {
 	
 	public static void main(String[] args) throws SQLException, JavaLayerException {
 		Ajanda ajnd = new Ajanda();
-		Thread thread = new Thread(ajnd);
+		thread = new Thread(ajnd);
 		thread.start();
 	}
 }

@@ -122,7 +122,7 @@ public class Veritabani {
 		while (resultset.next()) {
 			gelenTarih = resultset.getString("tarih-saat");
 			gelen = z.kacSaatVar(gelenTarih);
-			if ( gelen > 0 && gelen <= ilk) {
+			if ( gelen >= 1 && gelen <= ilk) {
 				ilk = gelen;
 				ilkHatirlatmaTarihi = gelenTarih;
 				mesaj = resultset.getString("not");

@@ -18,7 +18,7 @@ public class Zaman {
 		return utilDate;
 	}
 	
-	// uyari verirken kullanildi.
+	// uyar� verirken kullanildi.
 	public String kacSaatKacDkVar(String date) { 
 		Zaman z = new Zaman();
 		
@@ -68,7 +68,8 @@ public class Zaman {
 	public static void main(String[] args) {
 		Zaman z = new Zaman();
 		
-		System.out.println(z.kacSaatKacDkVar("05-06-2012 16:45:00"));
-		System.out.println(z.kacSaatVar("05-06-2012 16:45:00"));
+		System.out.println(z.kacSaatKacDkVar("06-06-2012 00:17:00"));
+		System.out.println(z.kacSaatVar("06-06-2012 00:17:00"));
+		System.out.println(z.sesCalinsinMi("06-06-2012 00:17:00"));
 	}
 }
