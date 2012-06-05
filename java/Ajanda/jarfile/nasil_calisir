@@ -1,0 +1,6 @@
+Ajanda uygulamasını çalıştırmak için sisteminizde MYSQL veritabanı olmalıdır.
+
+"dbAjanda" adında bir veritabanı ve tNotlar adında bir tablo lazım.
+dizindeki resimde bilgiler var.
+
+jar dosyasını çalıştırmak için komut satırına " java -jar Ajanda.jar " yazmanız yeterli.
