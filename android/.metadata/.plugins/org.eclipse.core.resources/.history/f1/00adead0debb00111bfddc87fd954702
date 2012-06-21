@@ -1,0 +1,31 @@
+package com.gceylan.helloandroid;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class main extends Activity {
+    
+	Button button;
+	TextView textView;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        button = (Button) findViewById(R.id.button);
+        textView = (TextView) findViewById(R.id.aciklama);
+        
+        button.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        
+    }
+}
