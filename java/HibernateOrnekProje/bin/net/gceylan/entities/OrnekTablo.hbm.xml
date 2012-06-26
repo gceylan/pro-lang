@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26.Haz.2012 11:57:30 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="net.gceylan.entities.OrnekTablo" table="ornek_tablo" catalog="hibernate_ornek_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tanim" type="string">
+            <column name="tanim" length="25" not-null="true" />
+        </property>
+        <property name="aciklama" type="string">
+            <column name="aciklama" length="25" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
