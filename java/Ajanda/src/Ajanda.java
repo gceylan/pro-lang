@@ -69,11 +69,16 @@ public class Ajanda extends JFrame implements Runnable {
 		
 		notP.add(new JLabel("Notunuzu ekleyin"), BorderLayout.NORTH);
 		
-		not = new JTextArea(15, 30);
+		not = new JTextArea(15, 34);
 		not.setLineWrap(true);
-		notP.add(not, BorderLayout.CENTER);
+		scrooll = new JScrollPane(not,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+		);
 		
-		Font f = new Font("Arial", Font.ITALIC ,13);
+		
+		notP.add(scrooll, BorderLayout.CENTER);
+		Font f = new Font("Arial", Font.ITALIC ,12);
 		not.setFont(f);
 		
 		JPanel butonlar = new JPanel(new GridLayout(2, 2, 5, 5));
@@ -152,7 +157,7 @@ public class Ajanda extends JFrame implements Runnable {
 		
 		JPanel p = new JPanel(new BorderLayout(10, 10));
 		
-		p.add(new JLabel("Mail Gönderildi!"), BorderLayout.CENTER);
+		p.add(new JLabel(hatirlatma[1]), BorderLayout.CENTER);
 		
 		tamam = new JButton("Tamam");
 		tamam.addActionListener(d1);
