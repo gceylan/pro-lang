@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Button Listener</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="main_title">Main Activity Form</string>
+    <string name="btn">Tıkla</string>
+    <string name="popup_message">Merhaba! Bu iletiyi tetikleyen buton buttonListener ile dinlenmektedir.</string>
+    <string name="text_red">red</string>
+    <string name="text_green">green</string>
+    <string name="text_blue">blue</string>
+
+</resources>

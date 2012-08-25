@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="fill_vertical" >
+
+    <TextView
+        android:id="@+id/main_activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:text="@string/main_title"
+        android:textSize="25dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/main_activity_title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <TextView
+            android:id="@+id/text_red"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#ff0000"
+            android:gravity="center"
+            android:text="@string/text_red" />
+
+        <TextView
+            android:id="@+id/text_green"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:background="#66cc00"
+            android:gravity="center"
+            android:text="@string/text_green" />
+
+        <TextView
+            android:id="@+id/text_blue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#003399"
+            android:gravity="center"
+            android:text="@string/text_blue" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:baselineAligned="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radio_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:checked="false"
+            android:gravity="center" />
+
+        <RadioButton
+            android:id="@+id/radio_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp" />
+
+        <RadioButton
+            android:id="@+id/redio_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:gravity="center" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/radioGroup1"
+        android:text="@string/btn" />
+
+</RelativeLayout>
