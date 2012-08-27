@@ -26,6 +26,14 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        
+        <activity
+            android:name=".OsSelectActivity">
+        </activity>
+        
+        <activity 
+            android:name=".ListViewScreen">            
+        </activity>
     </application>
 
 </manifest>

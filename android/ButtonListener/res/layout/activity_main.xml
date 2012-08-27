@@ -95,4 +95,13 @@
         android:layout_below="@+id/radioGroup1"
         android:text="@string/btn" />
 
+    <Button
+        android:id="@+id/btn_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_play"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/btn_play"
+        android:text="@string/list_view" />
+
 </RelativeLayout>

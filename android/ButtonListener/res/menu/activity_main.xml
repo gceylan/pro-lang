@@ -1,6 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_settings"
-        android:title="@string/menu_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+    <item
+        android:id="@+id/item_about"
+        android:title="@string/about">
+    </item>
+    <item
+        android:id="@+id/item_options"
+		android:title="@string/options">
+        <menu>
+            <item
+                android:id="@+id/item_theme"
+                android:title="@string/theme"/>
+            <item
+                android:id="@+id/item_settings"
+                android:title="@string/settings"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/item_exit"
+        android:title="@string/exit">
+    </item>
+    <item
+        android:id="@+id/item_restart"
+        android:title="@string/restart">
+    </item>
 </menu>
