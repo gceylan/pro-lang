@@ -1,0 +1,6 @@
+19:55:10,178  INFO Log4jExample:11 - STARTED!
+19:55:10,182  INFO Log4jExample:15 - Info
+19:55:10,182  WARN Log4jExample:16 - Warn
+19:55:10,182 ERROR Log4jExample:17 - Error
+19:55:10,182 FATAL Log4jExample:18 - Fatal
+19:55:10,183  INFO Log4jExample:20 - FINISHED!
