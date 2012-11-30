@@ -9,14 +9,16 @@
  * $ echo -n gceylan
  * gceylan$
  *
- * todo, j yi enum(true, false) yap
  */
 
+enum boolean {TRUE, FALSE} boole;
+
 int main(int argc, char *argv[]) {
-	int i = 1, j = 0;
+	boole = FALSE;
+	int i = 1;
 
 	if ((argc > 1) && (strcmp(argv[i], "-n") == 0)) {
-		j = 1;
+		boole = TRUE;
 		i++;
 	}
 
@@ -26,7 +28,7 @@ int main(int argc, char *argv[]) {
 			putchar(SEPARATOR);
 	}
 
-	if (j == 0)
+	if (boole)
 		putchar(NEWLINE);
 
 	exit(EXIT_SUCCESS);
