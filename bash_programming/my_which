@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#	$ chmod +x my_which
+#	$ ./my_which ls
+#	$ /bin/ls
+
+path=$PATH
+OIFS='$IFS'
+IFS=':'
+
+for dosya_yolu in $path; do
+	for program_yolu in ${dosya_yolu}/*; do
+		if [ "${program_yolu##*/}" = "$1" ]; then
+			echo $program_yolu
+			exit 0
+		fi
+	done
+done
+
+IFS=$OIFS
