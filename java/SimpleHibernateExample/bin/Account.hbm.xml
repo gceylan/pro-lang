@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17.May.2013 21:54:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.gceylan.vo.Account" table="ACCOUNT">
+        <id name="accountId" type="long">
+            <column name="ACCOUNT_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="accountType" type="java.lang.String">
+            <column name="ACCOUNT_TYPE" />
+        </property>
+        <property name="creationDate" type="java.util.Date">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="balance" type="double">
+            <column name="BALANCE" />
+        </property>
+    </class>
+</hibernate-mapping>
